@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <title>Fold!</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;600&display=swap" rel="stylesheet">
+</head>
+
+<style>
+  body {
+    margin: 8px;
+    background: #ddd;
+  }
+
+  .page {
+    font-family: 'Inter', sans-serif;
+    width: auto;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #eee;
+    background: #fff;
+    animation: fold linear;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+
+  @keyframes fold {
+    from {
+      opacity: 0;
+      height: 40vh;
+      transform: rotateX(-90deg);
+      transform-origin: top center;
+      background: #eee;
+    }
+    to {
+      opacity: 1;
+      height: 80vh;
+      transform: rotateX(0);
+      transform-origin: top center;
+      background: #fff;
+    }
+  }
+
+</style>
+
+<body>
+
+  <div class="page" id="page-1">
+    <div class="page-content">
+      <h1>Typography Matters</h1>
+      <p>Where form meets function in the digital age</p>
+    </div>
+  </div>
+
+  <div class="page" id="page-2">
+    <div class="page-content">
+      <h1>The Art of Fonts</h1>
+      <p>From letterpress to variable fonts: a journey through time</p>
+    </div>
+  </div>
+
+  <div class="page" id="page-3">
+    <div class="page-content">
+      <h1>Sans vs Serif</h1>
+      <p>The eternal debate in digital typography</p>
+    </div>
+  </div>
+
+  <div class="page" id="page-4">
+    <div class="page-content">
+      <h1>Variable Fonts</h1>
+      <p>One file, infinite possibilities</p>
+    </div>
+  </div>
+
+  <div class="page" id="page-5">
+    <div class="page-content">
+      <h1>Web Font Revolution</h1>
+      <p>Breaking free from system fonts since 2010</p>
+    </div>
+  </div>
+
+  <!-- Add this script before the closing body tag -->
+  <script>
+    // Make the first page visible immediately
+    document.querySelector('#page-1').classList.add('visible');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          // Don't remove visible class from page-1 when scrolling up to top
+          if (entry.target.id !== 'page-1') {
+            entry.target.classList.remove('visible');
+          }
+        }
+      });
+    }, {
+      threshold: 0.8,
+      rootMargin: '-100px 0px -100px 0px'
+    });
+
+    document.querySelectorAll('.page').forEach((element) => {
+      observer.observe(element);
+    });
+  </script>
+
+</body>
+
+</html>
